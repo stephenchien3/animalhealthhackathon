@@ -324,13 +324,21 @@ SidebarRail.displayName = "SidebarRail"
 
 const SidebarInset = React.forwardRef<
   HTMLDivElement,
-  React.ComponentProps<"main">
->(({ className, ...props }, ref) => {
+  React.ComponentProps<"main"> & { style?: React.CSSProperties }
+>(({ className, style, ...props }, ref) => {
+  const { state, isMobile } = useSidebar()
+  const marginLeft = isMobile
+    ? undefined
+    : state === "expanded"
+      ? SIDEBAR_WIDTH
+      : SIDEBAR_WIDTH_ICON
+
   return (
     <main
       ref={ref}
+      style={{ marginLeft, ...style }}
       className={cn(
-        "relative flex min-w-0 flex-1 flex-col overflow-hidden bg-background",
+        "relative flex min-w-0 flex-1 flex-col overflow-hidden bg-background transition-[margin-left] duration-200 ease-linear",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[state=collapsed]:peer-data-[variant=inset]:ml-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow",
         className
       )}
