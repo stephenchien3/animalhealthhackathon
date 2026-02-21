@@ -17,7 +17,7 @@ const navItems = [
   { to: "/summary", label: "Summary", icon: BarChart3 },
   { to: "/database", label: "Database", icon: Database },
   { to: "/map", label: "Map", icon: Map },
-  { to: "/marketplace", label: "Marketplace", icon: ShoppingCart },
+  { to: "/marketplace", label: "Recent Orders", icon: ShoppingCart },
 ];
 
 export function AppSidebar() {

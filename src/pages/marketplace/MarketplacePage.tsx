@@ -67,8 +67,8 @@ export default function MarketplacePage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Marketplace</h2>
-          <p className="text-muted-foreground">Browse and purchase soybean pallets or sheds.</p>
+          <h2 className="text-3xl font-bold tracking-tight">Recent Orders</h2>
+          <p className="text-muted-foreground">View your orders and available credits.</p>
         </div>
         <Badge variant="outline" className="text-base px-4 py-2">
           Credits: ${(credits ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
