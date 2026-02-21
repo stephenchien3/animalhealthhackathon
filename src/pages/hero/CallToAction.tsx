@@ -21,7 +21,7 @@ export default function CallToAction() {
                         <Button
                             variant="secondary"
                             asChild>
-                            <Link to="/login">Talk to Sales</Link>
+                            <Link to="/login">Talk to Sales Now</Link>
                         </Button>
                     </div>
                 </div>
