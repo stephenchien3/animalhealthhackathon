@@ -1,4 +1,4 @@
-# TypeScript Types — FeedShed Tracker
+# TypeScript Types — CleanFeed
 
 All types live in `src/types/index.ts`. This document is the reference for every interface in the app.
 
