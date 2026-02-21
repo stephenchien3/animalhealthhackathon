@@ -58,7 +58,12 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
       mapboxAccessToken={import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}
       initialViewState={{ longitude: 20, latitude: 0, zoom: 2 }}
       style={{ width: "100%", height: "100%" }}
-      mapStyle="mapbox://styles/mapbox/dark-v11"
+      mapStyle="mapbox://styles/mapbox/light-v11"
+      styleDiffing={false}
+      onLoad={(e) => {
+        const map = e.target;
+        map.setPaintProperty("land", "background-color", "#e5e7eb");
+      }}
       interactiveLayerIds={["shed-points"]}
       onClick={handleClick}
     >
@@ -81,7 +86,7 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
           type="symbol"
           filter={["has", "point_count"]}
           layout={{ "text-field": "{point_count_abbreviated}", "text-size": 12 }}
-          paint={{ "text-color": "#ffffff" }}
+          paint={{ "text-color": "#000000" }}
         />
         {/* Individual shed markers — colored by status */}
         <Layer
@@ -103,19 +108,19 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
           onClose={() => setPopup(null)}
           closeButton={false}
           anchor="bottom"
-          className="[&_.mapboxgl-popup-content]:bg-zinc-900 [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-zinc-700 [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-content]:p-0 [&_.mapboxgl-popup-content]:overflow-hidden [&_.mapboxgl-popup-tip]:border-t-zinc-900"
+          className="[&_.mapboxgl-popup-content]:bg-white [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-gray-200 [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-content]:p-0 [&_.mapboxgl-popup-content]:overflow-hidden [&_.mapboxgl-popup-tip]:border-t-white"
         >
-          <div className="w-52" style={{ background: "#09090b" }}>
+          <div className="w-52" style={{ background: "#ffffff" }}>
             {popup.imageUrl ? (
               <img src={popup.imageUrl} alt={popup.name} className="h-28 w-full object-cover" />
             ) : (
-              <div className="flex h-28 w-full items-center justify-center" style={{ background: "#18181b" }}>
-                <Warehouse className="size-8 text-zinc-500" />
+              <div className="flex h-28 w-full items-center justify-center" style={{ background: "#f4f4f5" }}>
+                <Warehouse className="size-8 text-zinc-400" />
               </div>
             )}
-            <div className="space-y-1 p-3 text-sm text-white">
+            <div className="space-y-1 p-3 text-sm text-black">
               <p className="font-semibold">{popup.name}</p>
-              <p className="text-zinc-400">{popup.code}</p>
+              <p className="text-zinc-500">{popup.code}</p>
               <Badge variant="secondary" className="text-xs">{popup.status}</Badge>
             </div>
           </div>

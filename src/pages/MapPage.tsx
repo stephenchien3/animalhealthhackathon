@@ -23,7 +23,7 @@ export default function MapPage() {
   }
 
   return (
-    <div className="-m-4 flex h-[calc(100vh-4rem)]">
+    <div className="-m-4 flex h-[calc(100vh-4rem)] bg-gray-100">
       <div className="flex-1">
         <MapView markers={markers ?? []} onMarkerClick={(m: MapMarker) => setSelectedShedId(m.shedId)} />
       </div>
