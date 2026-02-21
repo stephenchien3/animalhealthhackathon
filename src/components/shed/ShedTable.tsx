@@ -79,7 +79,7 @@ export default function ShedTable({ data, onEdit, onDelete }: ShedTableProps) {
         placeholder="Search sheds..."
         className="max-w-sm"
       />
-      <div className="rounded-md border">
+      <div className="overflow-x-auto rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

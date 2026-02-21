@@ -10,7 +10,7 @@ import {
   SidebarGroupContent, SidebarGroupLabel, SidebarHeader,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail, SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
+
 
 const navItems = [
   { to: "/dashboard", label: "Home", icon: Home },
@@ -69,11 +69,9 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
-              <Button variant="ghost" className="w-full justify-start" onClick={() => signOut()}>
-                <LogOut />
-                <span>Sign Out</span>
-              </Button>
+            <SidebarMenuButton onClick={() => signOut()} tooltip="Sign Out">
+              <LogOut />
+              <span>Sign Out</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
