@@ -32,7 +32,9 @@ export default function HeroSection() {
                         <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
                             <div className="mx-auto max-w-md text-center">
                                 <h1 className="text-balance font-serif text-4xl font-medium sm:text-5xl">Cleaner Feed. Healthier Animals.</h1>
-                                <p className="text-white mt-4 text-balance ">CleanFeed is your all-in-one platform for tracking drying sheds for soybean-based animal feed.</p>
+                                <p className="text-white mt-4 text-balance ">CleanFeed is your all-in-one platform to build and track drying sheds for soybean-based animal feed.
+
+                                </p>
 
                                 <Button
                                     asChild
