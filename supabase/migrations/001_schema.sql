@@ -131,16 +131,16 @@ CREATE POLICY "Update own profile" ON profiles FOR UPDATE
 -- ── Seed Data ─────────────────────────────────────────────────
 
 INSERT INTO corporations (id, name, contact_email, country, tier) VALUES
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'AgriCorp International', 'ops@agricorp.com', 'Brazil', 'multinational');
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'AgriCorp International', 'ops@agricorp.com', 'Zambia', 'multinational');
 
-INSERT INTO sheds (corporation_id, name, code, latitude, longitude, soybean_type, soybean_count, moisture_pct, temperature, capacity_tonnes, status) VALUES
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Mato Grosso Facility A', 'BR-042', -12.6819, -56.9211, 'meal',  4200.000, 12.3, 28.5, 5000.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Mato Grosso Facility B', 'BR-088', -13.0500, -55.4800, 'whole', 3100.500, 15.3, 30.1, 4000.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Buenos Aires Storage',   'AR-019', -34.6037, -58.3816, 'meal',  2800.000, 17.8, 22.3, 3500.000, 'maintenance'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Iowa Distribution Hub',  'US-107',  41.8780, -93.0977, 'whole', 5100.000, 16.1, 18.7, 6000.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Maharashtra Depot',      'IN-204',  19.7515,  75.7139, 'hull',  1500.750, 14.9, 33.2, 2000.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Goias Facility',         'BR-115', -15.8270, -49.8362, 'meal',  3800.000, 11.5, 27.8, 4500.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Rosario Port Storage',   'AR-033', -32.9468, -60.6393, 'other',  900.000, 10.2, 19.5, 1500.000, 'offline'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Parana Warehouse',       'BR-201', -25.4284, -49.2733, 'whole', 4600.000, 13.7, 25.1, 5500.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Illinois Feed Center',   'US-044',  40.6331, -89.3985, 'meal',  5500.000, 11.0, 15.3, 7000.000, 'operational'),
-  ('a1b2c3d4-0000-0000-0000-000000000001', 'Punjab Storage Unit',    'IN-078',  30.7333,  76.7794, 'hull',  1200.000, 13.1, 31.8, 2500.000, 'maintenance');
+INSERT INTO sheds (corporation_id, name, code, latitude, longitude, image_url, soybean_type, soybean_count, moisture_pct, temperature, capacity_tonnes, status) VALUES
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Lusaka Central Store',    'ZM-001', -15.3875,  28.3228, 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=300&fit=crop', 'meal',  4200.000, 12.3, 28.5, 5000.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Copperbelt Depot',        'ZM-002', -12.9714,  28.6317, 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=300&fit=crop', 'whole', 3100.500, 15.3, 30.1, 4000.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Southern Province Shed',  'ZM-003', -15.8000,  28.2800, 'https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop', 'meal',  2800.000, 17.8, 22.3, 3500.000, 'maintenance'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Kabwe Storage Facility',  'ZM-004', -14.4380,  28.4519, 'https://images.unsplash.com/photo-1530587191325-3db32d826c18?w=400&h=300&fit=crop', 'whole', 5100.000, 16.1, 18.7, 6000.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Livingstone Warehouse',   'ZM-005', -17.8419,  25.8544, 'https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?w=400&h=300&fit=crop', 'other',  900.000, 10.2, 19.5, 1500.000, 'offline'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Chipata Feed Center',     'ZM-006', -13.6390,  32.6460, 'https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=300&fit=crop', 'meal',  3800.000, 11.5, 27.8, 4500.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Maharashtra Depot',       'IN-204',  19.7515,  75.7139, 'https://images.unsplash.com/photo-1586771107445-b3e7eb4e1e48?w=400&h=300&fit=crop', 'hull',  1500.750, 14.9, 33.2, 2000.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Punjab Storage Unit',     'IN-078',  30.7333,  76.7794, 'https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=400&h=300&fit=crop', 'hull',  1200.000, 13.1, 31.8, 2500.000, 'maintenance'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Gujarat Feed Store',      'IN-115',  23.0225,  72.5714, 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400&h=300&fit=crop', 'meal',  5500.000, 11.0, 15.3, 7000.000, 'operational'),
+  ('a1b2c3d4-0000-0000-0000-000000000001', 'Madhya Pradesh Silo',     'IN-301',  23.2599,  77.4126, 'https://images.unsplash.com/photo-1592982537447-6f2a6a0c7c18?w=400&h=300&fit=crop', 'whole', 4600.000, 13.7, 25.1, 5500.000, 'operational');

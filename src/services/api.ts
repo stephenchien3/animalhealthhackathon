@@ -71,7 +71,7 @@ export async function fetchShedById(id: string): Promise<Shed> {
 export async function fetchMapMarkers(): Promise<MapMarker[]> {
   const { data, error } = await supabase
     .from("sheds")
-    .select("id, latitude, longitude, name, code, status");
+    .select("id, latitude, longitude, name, code, status, image_url");
   if (error) throw error;
   return (data ?? []).map((d) => ({
     shedId: d.id,
@@ -80,6 +80,7 @@ export async function fetchMapMarkers(): Promise<MapMarker[]> {
     name: d.name,
     code: d.code,
     status: d.status as MapMarker["status"],
+    imageUrl: (d.image_url as string) ?? null,
   }));
 }
 

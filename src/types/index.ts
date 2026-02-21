@@ -68,6 +68,7 @@ export interface MapMarker {
   name: string;
   code: string;
   status: ShedStatus;
+  imageUrl: string | null;
 }
 
 // ── Summary ─────────────────────────────────────────────────

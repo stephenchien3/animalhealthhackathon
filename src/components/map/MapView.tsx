@@ -9,6 +9,7 @@ import type { MapMouseEvent } from "react-map-gl/mapbox";
 import type { MapMarker } from "@/types";
 import { STATUS_COLORS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
+import { Warehouse } from "lucide-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapViewProps {
@@ -102,12 +103,21 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
           onClose={() => setPopup(null)}
           closeButton={false}
           anchor="bottom"
-          className="[&_.mapboxgl-popup-content]:bg-background [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-border [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-tip]:border-t-background"
+          className="[&_.mapboxgl-popup-content]:bg-zinc-900 [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-zinc-700 [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-content]:p-0 [&_.mapboxgl-popup-content]:overflow-hidden [&_.mapboxgl-popup-tip]:border-t-zinc-900"
         >
-          <div className="space-y-1 text-sm text-foreground">
-            <p className="font-semibold">{popup.name}</p>
-            <p className="text-muted-foreground">{popup.code}</p>
-            <Badge variant="secondary" className="text-xs">{popup.status}</Badge>
+          <div className="w-52">
+            {popup.imageUrl ? (
+              <img src={popup.imageUrl} alt={popup.name} className="h-28 w-full object-cover" />
+            ) : (
+              <div className="flex h-28 w-full items-center justify-center bg-zinc-800">
+                <Warehouse className="size-8 text-zinc-500" />
+              </div>
+            )}
+            <div className="space-y-1 p-3 text-sm text-white">
+              <p className="font-semibold">{popup.name}</p>
+              <p className="text-zinc-400">{popup.code}</p>
+              <Badge variant="secondary" className="text-xs">{popup.status}</Badge>
+            </div>
           </div>
         </Popup>
       )}
