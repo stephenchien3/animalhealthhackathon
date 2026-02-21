@@ -10,6 +10,21 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const SHED_IMAGES = [
+  "https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=200&fit=crop",
+  "https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=200&fit=crop",
+  "https://images.unsplash.com/photo-1500595046743-cd271d694d30?w=400&h=200&fit=crop",
+  "https://images.unsplash.com/photo-1530836176759-510f58baebf4?w=400&h=200&fit=crop",
+  "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&h=200&fit=crop",
+  "https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=400&h=200&fit=crop",
+];
+
+function getShedImage(code: string) {
+  let hash = 0;
+  for (let i = 0; i < code.length; i++) hash = (hash * 31 + code.charCodeAt(i)) | 0;
+  return SHED_IMAGES[Math.abs(hash) % SHED_IMAGES.length];
+}
+
 interface ShedDetailPanelProps {
   shedId: string;
   onClose: () => void;
@@ -47,9 +62,11 @@ export default function ShedDetailPanel({ shedId, onClose }: ShedDetailPanelProp
 
         <Badge variant={STATUS_VARIANT[shed.status] ?? "secondary"}>{shed.status}</Badge>
 
-        {shed.imageUrl && (
-          <img src={shed.imageUrl} alt={shed.name} className="h-40 w-full rounded-md object-cover" />
-        )}
+        <img
+          src={shed.imageUrl || getShedImage(shed.code)}
+          alt={shed.name}
+          className="h-40 w-full rounded-md object-cover"
+        />
 
         <Separator />
 

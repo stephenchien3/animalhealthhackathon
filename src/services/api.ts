@@ -4,7 +4,7 @@
  * Handles camelCase ↔ snake_case conversion between TypeScript and PostgreSQL.
  */
 import { supabase } from "@/lib/supabase";
-import type { Shed, CreateShedInput, UpdateShedInput, MapMarker } from "@/types";
+import type { Shed, CreateShedInput, UpdateShedInput, MapMarker, Listing, Order } from "@/types";
 
 // ── Helpers ─────────────────────────────────────────────────
 
@@ -142,4 +142,101 @@ export async function updateShed(id: string, input: UpdateShedInput): Promise<Sh
 export async function deleteShed(id: string): Promise<void> {
   const { error } = await supabase.from("sheds").delete().eq("id", id);
   if (error) throw error;
+}
+
+// ── Marketplace ─────────────────────────────────────────────
+
+function mapListing(row: Record<string, unknown>): Listing {
+  const shed = row.sheds ? mapShed(row.sheds as Record<string, unknown>) : undefined;
+  return {
+    id: row.id as string,
+    shedId: row.shed_id as string,
+    listingType: row.listing_type as Listing["listingType"],
+    title: row.title as string,
+    soybeanType: row.soybean_type as Listing["soybeanType"],
+    quantityTonnes: Number(row.quantity_tonnes),
+    priceUsd: Number(row.price_usd),
+    status: row.status as Listing["status"],
+    imageUrl: (row.image_url as string) ?? null,
+    createdAt: row.created_at as string,
+    shed,
+  };
+}
+
+/** Fetch all active listings with shed info. */
+export async function fetchListings(): Promise<Listing[]> {
+  const { data, error } = await supabase
+    .from("listings")
+    .select("*, sheds(*)")
+    .eq("status", "active")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((d) => mapListing(d as Record<string, unknown>));
+}
+
+/** Fetch credits for the current user's corporation. */
+export async function fetchCredits(): Promise<number> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return 0;
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("corporations(credits_usd)")
+    .eq("user_id", user.id)
+    .single();
+  if (error) return 0;
+  const corp = data?.corporations as unknown as { credits_usd: number } | null;
+  return Number(corp?.credits_usd ?? 0);
+}
+
+/** Place an order via the atomic RPC. */
+export async function placeOrder(listingId: string, quantity: number): Promise<string> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("user_id", user.id)
+    .single();
+  if (!profile) throw new Error("Profile not found");
+
+  const { data, error } = await supabase.rpc("place_order", {
+    p_listing_id: listingId,
+    p_buyer_profile_id: profile.id,
+    p_quantity: quantity,
+  });
+  if (error) throw error;
+  return data as string;
+}
+
+/** Fetch orders for the current user. */
+export async function fetchMyOrders(): Promise<Order[]> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return [];
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("user_id", user.id)
+    .single();
+  if (!profile) return [];
+
+  const { data, error } = await supabase
+    .from("orders")
+    .select("*, listings(*, sheds(*))")
+    .eq("buyer_id", profile.id)
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((d) => {
+    const row = d as Record<string, unknown>;
+    const listing = row.listings ? mapListing(row.listings as Record<string, unknown>) : undefined;
+    return {
+      id: row.id as string,
+      listingId: row.listing_id as string,
+      buyerId: row.buyer_id as string,
+      quantityTonnes: Number(row.quantity_tonnes),
+      totalPriceUsd: Number(row.total_price_usd),
+      status: row.status as Order["status"],
+      createdAt: row.created_at as string,
+      listing,
+    };
+  });
 }
