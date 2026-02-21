@@ -2,11 +2,13 @@
  * Home dashboard page.
  * Shows a welcome greeting, 3 quick KPI cards, and navigation shortcuts
  * to Summary, Database, and Map views.
+ * When no sheds exist yet, shows a prominent CTA to add the first shed.
  */
 import { Link } from "react-router";
-import { Warehouse, Droplets, AlertTriangle, BarChart3, Database, Map } from "lucide-react";
+import { Warehouse, Droplets, AlertTriangle, BarChart3, Database, Map, Plus } from "lucide-react";
 import { useSummary } from "@/hooks/useSummary";
 import { useCorporation } from "@/hooks/useCorporation";
+import { useSheds } from "@/hooks/useSheds";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,17 +16,45 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function HomePage() {
   const { data: summary, isLoading } = useSummary();
   const { data: corp } = useCorporation();
+  const { data: sheds } = useSheds();
+
+  const hasSheds = sheds && sheds.length > 0;
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight">
-          Welcome{corp?.name ? `, ${corp.name}` : ""}
-        </h1>
-        <p className="text-muted-foreground">
-          Your CleanFeed dashboard overview. Monitor sheds, view analytics, and manage your database.
-        </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">
+            Welcome{corp?.name ? `, ${corp.name}` : ""}
+          </h1>
+          <p className="text-muted-foreground">
+            Your CleanFeed dashboard overview. Monitor sheds, view analytics, and manage your database.
+          </p>
+        </div>
+        <Button asChild>
+          <Link to="/database?add=true">
+            <Plus className="mr-2 size-4" />Add Shed
+          </Link>
+        </Button>
       </div>
+
+      {/* Empty state — no sheds yet */}
+      {!isLoading && !hasSheds && (
+        <Card className="border-dashed">
+          <CardContent className="flex flex-col items-center justify-center py-12 text-center">
+            <Warehouse className="mb-4 size-12 text-muted-foreground" />
+            <h3 className="text-lg font-semibold">No sheds yet</h3>
+            <p className="mb-6 max-w-md text-sm text-muted-foreground">
+              Get started by adding your first shed. You can search for an address and it will automatically fill in the location coordinates.
+            </p>
+            <Button asChild size="lg">
+              <Link to="/database?add=true">
+                <Plus className="mr-2 size-4" />Add Your First Shed
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       {/* Quick KPI cards */}
       {isLoading || !summary ? (
@@ -39,7 +69,7 @@ export default function HomePage() {
             </Card>
           ))}
         </div>
-      ) : (
+      ) : hasSheds ? (
         <div className="grid gap-4 md:grid-cols-3">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -66,7 +96,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
         </div>
-      )}
+      ) : null}
 
       {/* Quick action cards */}
       <div className="grid gap-4 md:grid-cols-3">

@@ -2,8 +2,10 @@
  * Database page for CRUD management of sheds.
  * Shows a searchable/sortable table with add/edit/delete actions.
  * Create and edit use a modal dialog with validated form.
+ * Supports ?add=true query param to auto-open the Add Shed dialog.
  */
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router";
 import { Plus } from "lucide-react";
 import { useSheds } from "@/hooks/useSheds";
 import { useShedMutations } from "@/hooks/useShedMutations";
@@ -19,6 +21,16 @@ export default function DatabasePage() {
   const { createShed, updateShed, deleteShed } = useShedMutations();
   const [formOpen, setFormOpen] = useState(false);
   const [editingShed, setEditingShed] = useState<Shed | undefined>();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  // Auto-open form when navigated with ?add=true
+  useEffect(() => {
+    if (searchParams.get("add") === "true") {
+      setEditingShed(undefined);
+      setFormOpen(true);
+      setSearchParams({}, { replace: true });
+    }
+  }, [searchParams, setSearchParams]);
 
   function handleEdit(shed: Shed) {
     setEditingShed(shed);
@@ -30,10 +42,15 @@ export default function DatabasePage() {
   }
 
   function handleSubmit(data: CreateShedInput) {
-    if (editingShed) updateShed.mutate({ id: editingShed.id, input: data });
-    else createShed.mutate(data);
-    setFormOpen(false);
-    setEditingShed(undefined);
+    if (editingShed) {
+      updateShed.mutate({ id: editingShed.id, input: data }, {
+        onSuccess: () => { setFormOpen(false); setEditingShed(undefined); },
+      });
+    } else {
+      createShed.mutate(data, {
+        onSuccess: () => { setFormOpen(false); setEditingShed(undefined); },
+      });
+    }
   }
 
   if (isLoading) {
@@ -67,7 +84,9 @@ export default function DatabasePage() {
           <DialogHeader>
             <DialogTitle>{editingShed ? "Edit Shed" : "Add Shed"}</DialogTitle>
             <DialogDescription>
-              {editingShed ? "Update the details of this shed." : "Fill in the details to add a new shed."}
+              {editingShed
+                ? "Update the details of this shed."
+                : "Fill in the details below. Start typing in the address field to search for a location."}
             </DialogDescription>
           </DialogHeader>
           <ShedForm

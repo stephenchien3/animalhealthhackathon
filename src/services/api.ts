@@ -105,20 +105,20 @@ export async function createShed(input: CreateShedInput): Promise<Shed> {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error("Not authenticated");
 
-  // Resolve corporation_id from JWT metadata or profile
-  let corpId = user.user_metadata?.corporation_id;
-  if (!corpId) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("corporation_id")
-      .eq("user_id", user.id)
-      .single();
-    corpId = profile?.corporation_id;
+  // Always resolve corporation_id from profiles table (matches RLS policy)
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("corporation_id")
+    .eq("user_id", user.id)
+    .single();
+
+  if (profileError || !profile?.corporation_id) {
+    throw new Error("No corporation found for your account. Please contact support.");
   }
 
   const { data, error } = await supabase
     .from("sheds")
-    .insert({ ...toShedRow(input), corporation_id: corpId })
+    .insert({ ...toShedRow(input), corporation_id: profile.corporation_id })
     .select()
     .single();
   if (error) throw error;
