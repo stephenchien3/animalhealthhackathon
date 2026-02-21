@@ -27,10 +27,11 @@ const columns: ColumnDef<SoyRecord>[] = [
     header: "Date",
     cell: ({ getValue }) => new Date(getValue<string>()).toLocaleDateString(),
   },
-  { accessorKey: "buyerCompany", header: "Buyer" },
+  { accessorKey: "buyerCompany", header: "Buyer", enableSorting: true },
   {
     accessorKey: "soyType",
     header: "Soy Type",
+    enableSorting: true,
     cell: ({ getValue }) => <span className="capitalize">{getValue<string>()}</span>,
   },
   {
@@ -43,10 +44,11 @@ const columns: ColumnDef<SoyRecord>[] = [
     header: "Price (USD)",
     cell: ({ getValue }) => `$${getValue<number>().toLocaleString()}`,
   },
-  { accessorKey: "shedLocation", header: "Shed Location" },
+  { accessorKey: "shedLocation", header: "Shed Location", enableSorting: false },
   {
     accessorKey: "status",
     header: "Status",
+    enableSorting: true,
     cell: ({ getValue }) => <span className="capitalize">{getValue<string>()}</span>,
   },
 ];
@@ -72,12 +74,12 @@ export default function SoyRecordTable({ data }: SoyRecordTableProps) {
       <Input
         value={globalFilter}
         onChange={(e) => setGlobalFilter(e.target.value)}
-        placeholder="Search records..."
+        placeholder="Search buyer..."
         className="max-w-sm"
       />
       <div className="overflow-x-auto rounded-md border">
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-gray-100">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
