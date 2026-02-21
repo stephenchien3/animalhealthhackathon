@@ -20,6 +20,7 @@ const soyRecordSchema = z.object({
   quantityTonnes: z.coerce.number().min(0.001, "Quantity must be greater than 0"),
   priceUsd: z.coerce.number().min(0, "Price must be non-negative"),
   shedLocation: z.string().min(1, "Shed location is required"),
+  status: z.enum(["shipped", "delivered"]),
   soldAt: z.string().min(1, "Sale date is required"),
 });
 
@@ -42,12 +43,14 @@ export default function SoyRecordForm({ record, onSubmit, onCancel }: SoyRecordF
           quantityTonnes: record.quantityTonnes,
           priceUsd: record.priceUsd,
           shedLocation: record.shedLocation,
+          status: record.status,
           soldAt: record.soldAt.slice(0, 10),
         }
-      : { soyType: "whole", quantityTonnes: 0, priceUsd: 0, shedLocation: "", soldAt: "", shedId: "", buyerCompany: "" },
+      : { soyType: "whole", status: "shipped", quantityTonnes: 0, priceUsd: 0, shedLocation: "", soldAt: "", shedId: "", buyerCompany: "" },
   });
 
   const soyType = watch("soyType");
+  const status = watch("status");
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -71,6 +74,16 @@ export default function SoyRecordForm({ record, onSubmit, onCancel }: SoyRecordF
               <SelectItem value="whole">Whole</SelectItem>
               <SelectItem value="hull">Hull</SelectItem>
               <SelectItem value="other">Other</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="space-y-2">
+          <Label>Status</Label>
+          <Select value={status} onValueChange={(v) => setValue("status", v as CreateSoyRecordInput["status"])}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="shipped">Shipped</SelectItem>
+              <SelectItem value="delivered">Delivered</SelectItem>
             </SelectContent>
           </Select>
         </div>

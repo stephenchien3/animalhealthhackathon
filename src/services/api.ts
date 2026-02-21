@@ -253,6 +253,7 @@ function mapSoyRecord(row: Record<string, unknown>): SoyRecord {
     quantityTonnes: Number(row.quantity_tonnes),
     priceUsd: Number(row.price_usd),
     shedLocation: row.shed_location as string,
+    status: row.status as SoyRecord["status"],
     soldAt: row.sold_at as string,
     createdAt: row.created_at as string,
   };

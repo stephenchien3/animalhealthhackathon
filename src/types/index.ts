@@ -120,6 +120,7 @@ export interface Listing {
 
 // ── Soy Sales (Farmer) ──────────────────────────────────────
 export type SoyType = "meal" | "whole" | "hull" | "other";
+export type SoyRecordStatus = "shipped" | "delivered";
 
 export interface SoyRecord {
   id: UUID;
@@ -130,6 +131,7 @@ export interface SoyRecord {
   quantityTonnes: number;
   priceUsd: number;
   shedLocation: string;
+  status: SoyRecordStatus;
   soldAt: ISODateString;
   createdAt: ISODateString;
 }
@@ -141,6 +143,7 @@ export interface CreateSoyRecordInput {
   quantityTonnes: number;
   priceUsd: number;
   shedLocation: string;
+  status: SoyRecordStatus;
   soldAt: string;
 }
 

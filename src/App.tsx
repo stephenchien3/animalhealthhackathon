@@ -59,8 +59,10 @@ export default function App() {
           <Route path="/database" element={<DatabasePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/marketplace" element={<MarketplacePage />} />
-          <Route path="/farmerpage" element={<FarmerPage />} />
         </Route>
+
+        {/* Standalone farmer page (no sidebar) */}
+        <Route path="/farmerpage" element={<FarmerPage />} />
       </Routes>
       <Toaster richColors position="bottom-right" />
     </Suspense>

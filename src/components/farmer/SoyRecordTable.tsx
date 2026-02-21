@@ -44,6 +44,11 @@ const columns: ColumnDef<SoyRecord>[] = [
     cell: ({ getValue }) => `$${getValue<number>().toLocaleString()}`,
   },
   { accessorKey: "shedLocation", header: "Shed Location" },
+  {
+    accessorKey: "status",
+    header: "Status",
+    cell: ({ getValue }) => <span className="capitalize">{getValue<string>()}</span>,
+  },
 ];
 
 export default function SoyRecordTable({ data }: SoyRecordTableProps) {

@@ -26,7 +26,7 @@ export default function FarmerPage() {
 
   if (isLoading) {
     return (
-      <div className="space-y-4">
+      <div className="mx-auto max-w-6xl space-y-4 p-8">
         <div className="flex items-center justify-between">
           <Skeleton className="h-9 w-32" /><Skeleton className="h-10 w-24" />
         </div>
@@ -37,11 +37,11 @@ export default function FarmerPage() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="mx-auto max-w-6xl space-y-4 p-8">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Soy Sales Records</h2>
-          <p className="text-muted-foreground">Track records of soy sold — buyer, amount, price, and location.</p>
+          <h2 className="text-3xl font-bold tracking-tight">Soybean Sales Records</h2>
+          <p className="text-muted-foreground">Track records of soybeans sold.</p>
         </div>
         <Button onClick={() => setFormOpen(true)}>
           <Plus className="mr-2 size-4" />Add Record

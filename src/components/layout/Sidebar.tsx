@@ -3,7 +3,7 @@
  * Collapsible to icon-only mode. Includes sign-out button in footer.
  */
 import { NavLink, useLocation } from "react-router";
-import { Home, BarChart3, Database, Map, Warehouse, LogOut, ShoppingCart, Wheat } from "lucide-react";
+import { Home, BarChart3, Database, Map, Warehouse, LogOut, ShoppingCart } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import {
   Sidebar, SidebarContent, SidebarFooter, SidebarGroup,
@@ -18,7 +18,6 @@ const navItems = [
   { to: "/database", label: "Database", icon: Database },
   { to: "/map", label: "Map", icon: Map },
   { to: "/marketplace", label: "Marketplace", icon: ShoppingCart },
-  { to: "/farmerpage", label: "Farmer Portal", icon: Wheat },
 ];
 
 export function AppSidebar() {
