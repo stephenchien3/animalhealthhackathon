@@ -1,11 +1,11 @@
 import { Card } from '@/components/ui/card'
 import { Shield } from 'lucide-react'
-import { Vercel } from '@/components/ui/svgs/vercel'
-import { Supabase } from '@/components/ui/svgs/supabase'
-import { Linear } from '@/components/ui/svgs/linear'
-import { Slack } from '@/components/ui/svgs/slack'
-import { Firebase } from '@/components/ui/svgs/firebase'
-import { ClerkIconDark as Clerk } from '@/components/ui/svgs/clerk'
+import { Tyson } from '@/components/ui/svgs/tyson'
+import { Cargill } from '@/components/ui/svgs/cargill'
+import { Bunge } from '@/components/ui/svgs/bunge'
+import { Purina } from '@/components/ui/svgs/purina'
+import { ADM } from '@/components/ui/svgs/adm'
+import { Alltech } from '@/components/ui/svgs/alltech'
 
 export default function Features() {
     return (
@@ -20,8 +20,8 @@ export default function Features() {
                         variant="outline"
                         className="row-span-2 grid grid-rows-subgrid">
                         <div className="space-y-2">
-                            <h3 className="text-foreground font-medium">Seamless Integrations</h3>
-                            <p className="text-muted-foreground text-sm">Connect your favorite tools and services with just a few clicks.</p>
+                            <h3 className="text-foreground font-medium">Industry Integrations</h3>
+                            <p className="text-muted-foreground text-sm">Connect with leading feed producers and suppliers with just a few clicks.</p>
                         </div>
                         <div
                             aria-hidden
@@ -30,30 +30,30 @@ export default function Features() {
                                 <div className="bg-border absolute inset-0 my-auto h-px"></div>
 
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Vercel className="size-3.5" />
+                                    <Tyson className="h-3 w-12" />
                                 </div>
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Slack className="size-3.5" />
+                                    <Purina className="size-3.5" />
                                 </div>
                             </div>
                             <div className="pl-17 relative flex h-10 items-center justify-between gap-12 pr-6">
                                 <div className="bg-border absolute inset-0 my-auto h-px"></div>
 
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Clerk className="size-3.5" />
+                                    <Alltech className="size-3.5" />
                                 </div>
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Linear className="size-3.5" />
+                                    <Bunge className="h-3 w-12" />
                                 </div>
                             </div>
                             <div className="relative flex h-10 items-center gap-20 px-8">
                                 <div className="bg-border absolute inset-0 my-auto h-px"></div>
 
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Supabase className="size-3.5" />
+                                    <Cargill className="h-3 w-14" />
                                 </div>
                                 <div className="bg-card shadow-black/6.5 ring-border relative flex h-8 items-center rounded-full px-3 shadow-sm ring">
-                                    <Firebase className="size-3.5" />
+                                    <ADM className="h-3 w-10" />
                                 </div>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export default function Features() {
                         className="row-span-2 grid grid-rows-subgrid overflow-hidden">
                         <div className="space-y-2">
                             <h3 className="text-foreground font-medium">Real-time Sync</h3>
-                            <p className="text-muted-foreground text-sm">Keep your data synchronized across all platforms automatically.</p>
+                            <p className="text-muted-foreground text-sm">Keep your feed quality data synchronized across all facilities automatically.</p>
                         </div>
                         <div
                             aria-hidden
@@ -79,8 +79,8 @@ export default function Features() {
                         variant="outline"
                         className="row-span-2 grid grid-rows-subgrid overflow-hidden">
                         <div className="space-y-2">
-                            <h3 className="text-foreground font-medium">Developer First</h3>
-                            <p className="text-muted-foreground mt-2 text-sm">Built with developers in mind, featuring comprehensive APIs and SDKs.</p>
+                            <h3 className="text-foreground font-medium">API-First Platform</h3>
+                            <p className="text-muted-foreground mt-2 text-sm">Built for integration, featuring comprehensive APIs for feed quality data exchange.</p>
                         </div>
                         <div
                             aria-hidden
@@ -124,7 +124,7 @@ export default function Features() {
                         className="row-span-2 grid grid-rows-subgrid">
                         <div className="space-y-2">
                             <h3 className="font-medium">Enterprise Ready</h3>
-                            <p className="text-muted-foreground text-sm">Scale confidently with enterprise-grade security and reliability.</p>
+                            <p className="text-muted-foreground text-sm">Scale confidently with enterprise-grade security and compliance for feed safety standards.</p>
                         </div>
 
                         <div className="pointer-events-none relative -ml-7 flex size-44 items-center justify-center pt-5">

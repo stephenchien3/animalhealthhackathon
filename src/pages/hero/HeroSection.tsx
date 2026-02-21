@@ -3,15 +3,15 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { HeroHeader } from './HeroHeader'
 import { ChevronRight } from 'lucide-react'
-import { Supabase } from '@/components/ui/svgs/supabase'
-import { Slack } from '@/components/ui/svgs/slack'
-import { Twilio } from '@/components/ui/svgs/twilio'
-import { Linear } from '@/components/ui/svgs/linear'
-import { Figma } from '@/components/ui/svgs/figma'
-import { Vercel } from '@/components/ui/svgs/vercel'
-import { Firebase } from '@/components/ui/svgs/firebase'
-import { ClerkIconLight as Clerk } from '@/components/ui/svgs/clerk'
-import { Claude } from '@/components/ui/svgs/claude'
+import { Cargill } from '@/components/ui/svgs/cargill'
+import { Purina } from '@/components/ui/svgs/purina'
+import { BASF } from '@/components/ui/svgs/basf'
+import { Bunge } from '@/components/ui/svgs/bunge'
+import { Nutreco } from '@/components/ui/svgs/nutreco'
+import { Tyson } from '@/components/ui/svgs/tyson'
+import { ADM } from '@/components/ui/svgs/adm'
+import { Alltech } from '@/components/ui/svgs/alltech'
+import { Corteva } from '@/components/ui/svgs/corteva'
 
 export default function HeroSection() {
     return (
@@ -32,7 +32,7 @@ export default function HeroSection() {
                         <div className="relative z-10 mx-auto w-full max-w-5xl px-6">
                             <div className="mx-auto max-w-md text-center">
                                 <h1 className="text-balance font-serif text-4xl font-medium sm:text-5xl">Cleaner Feed. Healthier Animals.</h1>
-                                <p className="text-white mt-4 text-balance ">CleanFeed is your all-in-one platform for monitoring and optimizing soybean-based animal feed quality.</p>
+                                <p className="text-white mt-4 text-balance ">CleanFeed is your all-in-one platform for tracking drying sheds for soybean-based animal feed.</p>
 
                                 <Button
                                     asChild
@@ -47,56 +47,50 @@ export default function HeroSection() {
                                 <div className="**:fill-foreground grid scale-95 grid-cols-3 gap-12">
                                     <div className="ml-auto blur-[2px]">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Supabase className="size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Supabase</span>
+                                            <Cargill className="h-3.5 w-16" />
                                         </Card>
                                     </div>
                                     <div className="ml-auto">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Slack className="size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Slack</span>
+                                            <Purina className="size-4" />
+                                            <span className="text-nowrap font-medium max-sm:text-xs">Purina</span>
                                         </Card>
                                     </div>
                                     <div className="ml-auto blur-[2px]">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Figma className="size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Figma</span>
+                                            <Nutreco className="h-3.5 w-16" />
                                         </Card>
                                     </div>
                                     <div className="mr-auto">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Vercel className="size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Vercel</span>
+                                            <Tyson className="h-3.5 w-14" />
                                         </Card>
                                     </div>
                                     <div className="blur-[2px]">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Firebase className="size-3 sm:size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Firebase</span>
+                                            <ADM className="h-3.5 w-12" />
                                         </Card>
                                     </div>
                                     <div>
                                         <Card className="shadow-foreground/10 mx-a flex h-10 h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Linear className="size-3 sm:size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Linear</span>
+                                            <Bunge className="h-3.5 w-14" />
                                         </Card>
                                     </div>
                                     <div className="ml-auto blur-[2px]">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Twilio className="size-3 sm:size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Twilio</span>
+                                            <BASF className="h-3.5 w-12" />
                                         </Card>
                                     </div>
                                     <div>
                                         <Card className="shadow-foreground/10 mx-a flex h-10 h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Claude className="size-3 sm:size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Claude AI</span>
+                                            <Corteva className="size-3 sm:size-4" />
+                                            <span className="text-nowrap font-medium max-sm:text-xs">Corteva</span>
                                         </Card>
                                     </div>
                                     <div className="blur-[2px]">
                                         <Card className="shadow-foreground/10 flex h-8 w-fit items-center gap-2 rounded-xl px-3 sm:h-10 sm:px-4">
-                                            <Clerk className="size-3 sm:size-4" />
-                                            <span className="text-nowrap font-medium max-sm:text-xs">Clerk </span>
+                                            <Alltech className="size-3 sm:size-4" />
+                                            <span className="text-nowrap font-medium max-sm:text-xs">Alltech</span>
                                         </Card>
                                     </div>
                                 </div>

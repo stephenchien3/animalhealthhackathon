@@ -1,85 +1,54 @@
 import React, { useEffect, useState } from 'react'
 
-import { Beacon } from '@/components/ui/svgs/beacon'
-import { Bolt } from '@/components/ui/svgs/bolt'
-import { Cisco } from '@/components/ui/svgs/cisco'
-import { Hulu } from '@/components/ui/svgs/hulu'
-import { Supabase } from '@/components/ui/svgs/supabase'
+import { CargillFull } from '@/components/ui/svgs/cargill'
+import { TysonFull } from '@/components/ui/svgs/tyson'
+import { ADMFull } from '@/components/ui/svgs/adm'
+import { PurinaFull } from '@/components/ui/svgs/purina'
+import { BungeFull } from '@/components/ui/svgs/bunge'
+import { AlltechFull } from '@/components/ui/svgs/alltech'
+import { ElancoFull } from '@/components/ui/svgs/elanco'
+import { ZoetisFull } from '@/components/ui/svgs/zoetis'
+import { KeminFull } from '@/components/ui/svgs/kemin'
+import { BASFFull } from '@/components/ui/svgs/basf'
+import { NutrecoFull } from '@/components/ui/svgs/nutreco'
+import { CortevaFull } from '@/components/ui/svgs/corteva'
 import { AnimatePresence, motion } from 'motion/react'
-import { VercelFull } from '@/components/ui/svgs/vercel'
-import { Spotify } from '@/components/ui/svgs/spotify'
 
-const aiLogos: React.ReactNode[] = [
-    <Bolt
-        key="bolt"
-        className="h-3.5 w-full"
-    />,
-    <Beacon
-        key="beacon"
-        className="h-3.5 w-full"
-    />,
-    <Hulu
-        key="hulu"
-        className="h-3.5 w-full"
-    />,
+const feedProducers: React.ReactNode[] = [
+    <CargillFull key="cargill" className="h-3.5 w-full" />,
+    <TysonFull key="tyson" className="h-3.5 w-full" />,
+    <ADMFull key="adm" className="h-3.5 w-full" />,
 ]
 
-const hostingLogos: React.ReactNode[] = [
-    <Supabase
-        key="supabase"
-        className="size-5"
-    />,
-    <Spotify
-        key="spotify"
-        className="h-5 w-full"
-    />,
-    <VercelFull
-        key="vercel"
-        className="h-3.5 w-full"
-    />,
+const nutritionBrands: React.ReactNode[] = [
+    <PurinaFull key="purina" className="h-3.5 w-full" />,
+    <BungeFull key="bunge" className="h-3.5 w-full" />,
+    <AlltechFull key="alltech" className="h-3.5 w-full" />,
 ]
 
-const paymentsLogos: React.ReactNode[] = [
-    <Hulu
-        key="hulu"
-        className="h-3.5 w-full"
-    />,
-    <VercelFull
-        key="vercel"
-        className="h-3.5 w-full"
-    />,
-    <Spotify
-        key="spotify"
-        className="h-5 w-full"
-    />,
+const animalHealth: React.ReactNode[] = [
+    <ElancoFull key="elanco" className="h-3.5 w-full" />,
+    <ZoetisFull key="zoetis" className="h-3.5 w-full" />,
+    <KeminFull key="kemin" className="h-3.5 w-full" />,
 ]
 
-const streamingLogos: React.ReactNode[] = [
-    <Cisco
-        key="cisco"
-        className="h-5 w-full"
-    />,
-    <Hulu
-        key="hulu"
-        className="h-3.5 w-full"
-    />,
-    <Spotify
-        key="spotify"
-        className="h-5 w-full"
-    />,
+const agriTech: React.ReactNode[] = [
+    <BASFFull key="basf" className="h-3.5 w-full" />,
+    <NutrecoFull key="nutreco" className="h-3.5 w-full" />,
+    <CortevaFull key="corteva" className="h-3.5 w-full" />,
 ]
 
-type LogoGroup = 'ai' | 'hosting' | 'payments' | 'streaming'
+type LogoGroup = 'feedProducers' | 'nutritionBrands' | 'animalHealth' | 'agriTech'
 
 const logos: { [key in LogoGroup]: React.ReactNode[] } = {
-    ai: aiLogos,
-    hosting: hostingLogos,
-    payments: paymentsLogos,
-    streaming: streamingLogos,
+    feedProducers,
+    nutritionBrands,
+    animalHealth,
+    agriTech,
 }
 
 export default function LogoCloud() {
-    const [currentGroup, setCurrentGroup] = useState<LogoGroup>('ai')
+    const [currentGroup, setCurrentGroup] = useState<LogoGroup>('feedProducers')
 
     useEffect(() => {
         const interval = setInterval(() => {
