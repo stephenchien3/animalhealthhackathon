@@ -23,7 +23,7 @@ export default function LoginPage() {
         )
     }
 
-    if (session) return <Navigate to="/" replace />
+    if (session) return <Navigate to="/dashboard" replace />
 
     async function handleSubmit(e: React.FormEvent) {
         e.preventDefault()
@@ -32,7 +32,7 @@ export default function LoginPage() {
         const { error } = await signIn(email, password)
         setSubmitting(false)
         if (error) setError(error.message)
-        else navigate('/')
+        else navigate('/dashboard')
     }
 
     return (

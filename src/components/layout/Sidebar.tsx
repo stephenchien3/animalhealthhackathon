@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 const navItems = [
-  { to: "/", label: "Home", icon: Home },
+  { to: "/dashboard", label: "Home", icon: Home },
   { to: "/summary", label: "Summary", icon: BarChart3 },
   { to: "/database", label: "Database", icon: Database },
   { to: "/map", label: "Map", icon: Map },
@@ -29,7 +29,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <NavLink to="/">
+              <NavLink to="/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Warehouse className="size-4" />
                 </div>
@@ -48,8 +48,8 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {navItems.map((item) => {
-                const isActive = item.to === "/"
-                  ? location.pathname === "/"
+                const isActive = item.to === "/dashboard"
+                  ? location.pathname === "/dashboard"
                   : location.pathname.startsWith(item.to);
                 return (
                   <SidebarMenuItem key={item.to}>

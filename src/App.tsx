@@ -36,7 +36,7 @@ export default function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         {/* Public hero / marketing pages */}
-        <Route path="/hero" element={<HeroPage />} />
+        <Route path="/" element={<HeroPage />} />
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/integrations" element={<IntegrationsPage />} />
         <Route path="/stats" element={<StatsPage />} />
@@ -52,7 +52,7 @@ export default function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard" element={<HomePage />} />
           <Route path="/summary" element={<SummaryPage />} />
           <Route path="/database" element={<DatabasePage />} />
           <Route path="/map" element={<MapPage />} />
