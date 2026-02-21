@@ -98,7 +98,7 @@ export default function SummaryPage() {
                     tickFormatter={(v) => v.charAt(0).toUpperCase() + v.slice(1)} />
                   <YAxis tickLine={false} axisLine={false} />
                   <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-                  <Bar dataKey="tonnes" fill="var(--color-tonnes)" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="tonnes" fill="#455246" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ChartContainer>
             </CardContent>

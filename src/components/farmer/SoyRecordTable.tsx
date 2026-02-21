@@ -8,11 +8,12 @@ import {
   type ColumnDef, type SortingState,
 } from "@tanstack/react-table";
 import { useState } from "react";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDown, Truck, CheckCircle } from "lucide-react";
 import type { SoyRecord } from "@/types";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import {
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
 } from "@/components/ui/table";
@@ -21,18 +22,17 @@ interface SoyRecordTableProps {
   data: SoyRecord[];
 }
 
+const STATUS_CONFIG = {
+  shipped: { label: "Shipped", icon: Truck, variant: "secondary" as const },
+  delivered: { label: "Delivered", icon: CheckCircle, variant: "default" as const },
+};
+
 const columns: ColumnDef<SoyRecord>[] = [
   {
-    accessorKey: "soldAt",
-    header: "Date",
-    cell: ({ getValue }) => new Date(getValue<string>()).toLocaleDateString(),
-  },
-  { accessorKey: "buyerCompany", header: "Buyer", enableSorting: true },
-  {
-    accessorKey: "soyType",
-    header: "Soy Type",
+    accessorKey: "buyerCompany",
+    header: "Buyer",
     enableSorting: true,
-    cell: ({ getValue }) => <span className="capitalize">{getValue<string>()}</span>,
+    cell: ({ getValue }) => getValue<string>(),
   },
   {
     accessorKey: "quantityTonnes",
@@ -42,14 +42,31 @@ const columns: ColumnDef<SoyRecord>[] = [
   {
     accessorKey: "priceUsd",
     header: "Price (USD)",
-    cell: ({ getValue }) => `$${getValue<number>().toLocaleString()}`,
+    cell: ({ getValue }) => <span className="font-medium">${getValue<number>().toLocaleString()}</span>,
   },
   { accessorKey: "shedLocation", header: "Shed Location", enableSorting: false },
   {
     accessorKey: "status",
     header: "Status",
     enableSorting: true,
-    cell: ({ getValue }) => <span className="capitalize">{getValue<string>()}</span>,
+    cell: ({ getValue }) => {
+      const status = getValue<string>() as keyof typeof STATUS_CONFIG;
+      const cfg = STATUS_CONFIG[status];
+      const Icon = cfg.icon;
+      return (
+        <Badge variant={cfg.variant} className="gap-1">
+          <Icon className="size-3" />
+          {cfg.label}
+        </Badge>
+      );
+    },
+  },
+  {
+    accessorKey: "soldAt",
+    header: "Date",
+    cell: ({ getValue }) => (
+      <span className="text-muted-foreground">{new Date(getValue<string>()).toLocaleDateString()}</span>
+    ),
   },
 ];
 
