@@ -97,3 +97,34 @@ export interface DashboardSummary {
   statsByType: SoybeanTypeStat[];
   improvements: ImprovementSuggestion[];
 }
+
+// ── Marketplace ─────────────────────────────────────────────
+
+export type ListingType = "pallet" | "shed";
+export type ListingStatus = "active" | "sold" | "cancelled";
+export type OrderStatus = "pending" | "confirmed" | "delivered";
+
+export interface Listing {
+  id: UUID;
+  shedId: UUID;
+  listingType: ListingType;
+  title: string;
+  soybeanType: SoybeanType;
+  quantityTonnes: number;
+  priceUsd: number;
+  status: ListingStatus;
+  imageUrl: string | null;
+  createdAt: ISODateString;
+  shed?: Shed;
+}
+
+export interface Order {
+  id: UUID;
+  listingId: UUID;
+  buyerId: UUID;
+  quantityTonnes: number;
+  totalPriceUsd: number;
+  status: OrderStatus;
+  createdAt: ISODateString;
+  listing?: Listing;
+}
