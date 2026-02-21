@@ -9,6 +9,7 @@ import type { MapMouseEvent } from "react-map-gl/mapbox";
 import type { MapMarker } from "@/types";
 import { STATUS_COLORS } from "@/lib/constants";
 import { Badge } from "@/components/ui/badge";
+import { Warehouse } from "lucide-react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 interface MapViewProps {
@@ -113,7 +114,6 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
           anchor="bottom"
           className="[&_.mapboxgl-popup-content]:bg-white [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-gray-200 [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-content]:p-0 [&_.mapboxgl-popup-content]:overflow-hidden [&_.mapboxgl-popup-tip]:border-t-white"
         >
-<<<<<<< HEAD
           <div className="w-52" style={{ background: "#ffffff" }}>
             {popup.imageUrl ? (
               <img src={popup.imageUrl} alt={popup.name} className="h-28 w-full object-cover" />
@@ -123,10 +123,6 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
               </div>
             )}
             <div className="space-y-1 p-3 text-sm text-black">
-=======
-          <div className="w-52" style={{ background: "#09090b" }}>
-            <div className="space-y-1 p-3 text-sm text-white">
->>>>>>> f98a46d737e26d4ba048f0036c9c8d3dfa36359d
               <p className="font-semibold">{popup.name}</p>
               <p className="text-zinc-500">{popup.code}</p>
               <Badge variant="secondary" className="text-xs">{popup.status}</Badge>
