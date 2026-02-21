@@ -102,8 +102,9 @@ export default function MapView({ markers, onMarkerClick }: MapViewProps) {
           onClose={() => setPopup(null)}
           closeButton={false}
           anchor="bottom"
+          className="[&_.mapboxgl-popup-content]:bg-background [&_.mapboxgl-popup-content]:border [&_.mapboxgl-popup-content]:border-border [&_.mapboxgl-popup-content]:rounded-lg [&_.mapboxgl-popup-content]:shadow-lg [&_.mapboxgl-popup-tip]:border-t-background"
         >
-          <div className="space-y-1 text-sm">
+          <div className="space-y-1 text-sm text-foreground">
             <p className="font-semibold">{popup.name}</p>
             <p className="text-muted-foreground">{popup.code}</p>
             <Badge variant="secondary" className="text-xs">{popup.status}</Badge>
