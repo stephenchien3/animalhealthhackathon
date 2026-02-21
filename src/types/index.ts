@@ -118,6 +118,34 @@ export interface Listing {
   shed?: Shed;
 }
 
+// ── Soy Sales (Farmer) ──────────────────────────────────────
+export type SoyType = "meal" | "whole" | "hull" | "other";
+
+export interface SoyRecord {
+  id: UUID;
+  corporationId: UUID;
+  shedId: UUID;
+  buyerCompany: string;
+  soyType: SoyType;
+  quantityTonnes: number;
+  priceUsd: number;
+  shedLocation: string;
+  soldAt: ISODateString;
+  createdAt: ISODateString;
+}
+
+export interface CreateSoyRecordInput {
+  shedId: string;
+  buyerCompany: string;
+  soyType: SoyType;
+  quantityTonnes: number;
+  priceUsd: number;
+  shedLocation: string;
+  soldAt: string;
+}
+
+export type UpdateSoyRecordInput = Partial<CreateSoyRecordInput>;
+
 export interface Order {
   id: UUID;
   listingId: UUID;

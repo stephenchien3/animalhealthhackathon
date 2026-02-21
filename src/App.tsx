@@ -17,6 +17,7 @@ const SummaryPage = lazy(() => import("./pages/SummaryPage"));
 const DatabasePage = lazy(() => import("./pages/DatabasePage"));
 const MapPage = lazy(() => import("./pages/MapPage"));
 const MarketplacePage = lazy(() => import("./pages/marketplace/MarketplacePage"));
+const FarmerPage = lazy(() => import("./pages/FarmerPage"));
 
 // Lazy-load hero sub-pages (standalone routes)
 const FeaturesPage = lazy(() => import("./pages/hero/Features"));
@@ -58,6 +59,7 @@ export default function App() {
           <Route path="/database" element={<DatabasePage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/marketplace" element={<MarketplacePage />} />
+          <Route path="/farmerpage" element={<FarmerPage />} />
         </Route>
       </Routes>
       <Toaster richColors position="bottom-right" />

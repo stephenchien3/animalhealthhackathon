@@ -4,7 +4,7 @@
  * Handles camelCase ↔ snake_case conversion between TypeScript and PostgreSQL.
  */
 import { supabase } from "@/lib/supabase";
-import type { Shed, CreateShedInput, UpdateShedInput, MapMarker, Listing, Order } from "@/types";
+import type { Shed, CreateShedInput, UpdateShedInput, MapMarker, Listing, Order, SoyRecord, CreateSoyRecordInput, UpdateSoyRecordInput } from "@/types";
 
 // ── Helpers ─────────────────────────────────────────────────
 
@@ -239,4 +239,83 @@ export async function fetchMyOrders(): Promise<Order[]> {
       listing,
     };
   });
+}
+
+// ── Soy Records (Farmer) ───────────────────────────────────
+
+function mapSoyRecord(row: Record<string, unknown>): SoyRecord {
+  return {
+    id: row.id as string,
+    corporationId: row.corporation_id as string,
+    shedId: row.shed_id as string,
+    buyerCompany: row.buyer_company as string,
+    soyType: row.soy_type as SoyRecord["soyType"],
+    quantityTonnes: Number(row.quantity_tonnes),
+    priceUsd: Number(row.price_usd),
+    shedLocation: row.shed_location as string,
+    soldAt: row.sold_at as string,
+    createdAt: row.created_at as string,
+  };
+}
+
+/** Fetch all soy sale records for the current corporation. */
+export async function fetchSoyRecords(): Promise<SoyRecord[]> {
+  const { data, error } = await supabase
+    .from("soy_records")
+    .select("*")
+    .order("sold_at", { ascending: false });
+  if (error) throw error;
+  return (data ?? []).map((d) => mapSoyRecord(d as Record<string, unknown>));
+}
+
+/** Create a new soy sale record. */
+export async function createSoyRecord(input: CreateSoyRecordInput): Promise<SoyRecord> {
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) throw new Error("Not authenticated");
+
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("corporation_id")
+    .eq("user_id", user.id)
+    .single();
+
+  if (profileError || !profile?.corporation_id) {
+    throw new Error("No corporation found for your account.");
+  }
+
+  const row: Record<string, unknown> = {};
+  for (const [key, val] of Object.entries(input)) {
+    if (val !== undefined) row[toSnake(key)] = val;
+  }
+
+  const { data, error } = await supabase
+    .from("soy_records")
+    .insert({ ...row, corporation_id: profile.corporation_id })
+    .select()
+    .single();
+  if (error) throw error;
+  return mapSoyRecord(data as Record<string, unknown>);
+}
+
+/** Update a soy sale record. */
+export async function updateSoyRecord(id: string, input: UpdateSoyRecordInput): Promise<SoyRecord> {
+  const row: Record<string, unknown> = {};
+  for (const [key, val] of Object.entries(input)) {
+    if (val !== undefined) row[toSnake(key)] = val;
+  }
+
+  const { data, error } = await supabase
+    .from("soy_records")
+    .update(row)
+    .eq("id", id)
+    .select()
+    .single();
+  if (error) throw error;
+  return mapSoyRecord(data as Record<string, unknown>);
+}
+
+/** Delete a soy sale record. */
+export async function deleteSoyRecord(id: string): Promise<void> {
+  const { error } = await supabase.from("soy_records").delete().eq("id", id);
+  if (error) throw error;
 }
